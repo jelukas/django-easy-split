@@ -24,12 +24,13 @@ class ExperimentLoader(object):
         if not cls.__loaded:
             cls.__loaded = True
             for app_name in apps:
-                application_path = os.path.dirname(sys.modules[app_name].__file__)
-                application_experiment_file_path = (
-                    application_path +
-                    ExperimentLoader.APPLICATION_RELATIVE_EXPERIMENT_FILE)
-                if os.access(application_experiment_file_path, os.F_OK):
-                    ExperimentLoader.load_experiments(application_experiment_file_path)
+                if app_name != 'django.contrib.admin.apps.SimpleAdminConfig' and app_name != 'debug_toolbar.apps.DebugToolbarConfig':
+                    application_path = os.path.dirname(sys.modules[app_name].__file__)
+                    application_experiment_file_path = (
+                        application_path +
+                        ExperimentLoader.APPLICATION_RELATIVE_EXPERIMENT_FILE)
+                    if os.access(application_experiment_file_path, os.F_OK):
+                        ExperimentLoader.load_experiments(application_experiment_file_path)
     
     @staticmethod
     def load_experiments(filename):
