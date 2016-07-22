@@ -3,8 +3,7 @@ import logging, os, sys
 l = logging.getLogger(__name__)
 
 from django.conf import settings
-from django.utils import simplejson
-
+import json as simplejson
 from .models import Experiment
 
 class ExperimentLoader(object):
